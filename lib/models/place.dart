@@ -1,4 +1,4 @@
-import 'package:fluter_locator/services/geometry.dart';
+import 'package:fluter_locator/models/geometry.dart';
 
 class Place {
   final String name;
