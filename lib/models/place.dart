@@ -16,12 +16,12 @@ class Place {
 
   Place.fromJson(Map<dynamic, dynamic> parsedJson)
       : name = parsedJson['name'],
-        rating = (parsedJson["rating"] != null)
-            ? parsedJson["rating"].toDouble()
+        rating = (parsedJson['rating'] != null)
+            ? parsedJson['rating'].toDouble()
             : null,
-        vicinity = parsedJson["vicinity"],
-        geometry = Geometry.fromJson(parsedJson["geometry"]),
-        userRatingCount = (parsedJson["user_rating_total"] != null)
-            ? parsedJson["user_rating_total"]
-            : null;
+        userRatingCount = (parsedJson['user_ratings_total'] != null)
+            ? parsedJson['user_ratings_total']
+            : null,
+        vicinity = parsedJson['vicinity'],
+        geometry = Geometry.fromJson(parsedJson['geometry']);
 }
