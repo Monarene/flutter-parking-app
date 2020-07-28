@@ -1,4 +1,5 @@
 import 'package:fluter_locator/services/geolocator_services.dart';
+import 'package:fluter_locator/services/marker_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:geolocator/geolocator.dart';
@@ -14,6 +15,7 @@ class Search extends StatelessWidget {
     final currentPosition = Provider.of<Position>(context);
     final placesProvider = Provider.of<Future<List<Place>>>(context);
     final geoservice = GeolocatorService();
+    final markerService = MarkerService();
 
     return FutureProvider(
       create: (context) => placesProvider,
@@ -21,6 +23,9 @@ class Search extends StatelessWidget {
         body: (currentPosition != null)
             ? Consumer<List<Place>>(
                 builder: (_, places, __) {
+                  var markers = (places != null)
+                      ? markerService.getMarkers(places)
+                      : List<Marker>();
                   return (places != null)
                       ? Column(
                           children: <Widget>[
@@ -33,6 +38,7 @@ class Search extends StatelessWidget {
                                         currentPosition.longitude),
                                     zoom: 16.0),
                                 zoomGesturesEnabled: true,
+                                markers: Set<Marker>.of(markers),
                               ),
                             ),
                             SizedBox(
